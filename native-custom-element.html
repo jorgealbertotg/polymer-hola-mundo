@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <template id="contenido">
+    <style>
+      h1 {
+        color: tomato;
+      }
+    </style>
+    <h1>Componente</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, nulla soluta. Quos, mollitia unde. Itaque excepturi deserunt repellendus voluptates quas vel natus provident, est quo voluptate, odit velit, nihil nulla.</p>
+  </template>
+  <script>
+    class MiComponente extends HTMLElement {
+      constructor() {
+        super();
+        console.log('Iniciando mi-componente');
+        var c = document.getElementById('contenido');
+        this.attachShadow({mode: 'open'}).innerHTML = c.innerHTML;
+      }
+    }
+    customElements.define('mi-componente', MiComponente);
+  </script>
+
+  <mi-componente></mi-componente>
+</body>
+</html>
