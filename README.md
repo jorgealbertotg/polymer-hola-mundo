@@ -43,3 +43,116 @@ Componentes encapsulados desde el **shadow root**
 ### TEMPLATE
 
 La etiqueta **template** no *'aparece'*. Para usarlo dentro de un *custom element*, le asignamos un *id* y accedemos a su contenido y lo volcamos dentro del *custom element* mediante la propiedad **innerHTML** de los elementos.
+
+## Shadow DOM
+
+- Oculta la complejidad de los *custom elements*
+- Encapsula funcionalidad y estilos.
+- Permite el *scope* del árbol de nodos
+
+### Shady DOM
+
+API de Polymer. Pseudo Shadow DOM
+- Encapsula funcionalidad y estilos.
+- Permite el *scope* del árbol de nodos
+- Listo para producción
+
+## Local DOM
+
+Elementos HTML que estan dentro del componente.
+
+## Light DOM 
+
+Hijos del elemento.
+
+### Manipulación del DOM
+
+??????
+
+# Propiedades
+
+Se definen dentro del método *properties*
+
+- type. Boolean, Date, Number, String, Array, Object
+- value. Valor por defecto.
+- observer. 
+
+# Life cycle
+
+El ciclo de vida de un componente en **Polymer** consta de 4 etapas, a saber:
+
+* constructor
+  Solo ocurre una sola vez. Se crea el componente, pero las propiedades y valores aun no estan inicializadas. El Local DOM (el DOM interno del componente) aun no se inicializa.
+
+* ready
+  Solo se ejecuta una sola vez. Valores y propiedades son inicialzados. El Local DOM se inicializa.
+
+* connectedCallback
+  Puede ser ejecutada multiples veces. El elemento se integra en el DOM.
+
+* disconnectedCallback
+  Puede ser ejecutada multiples veces. El elemento se quita del DOM.
+
+* attributeChangedCallback
+  Se ejecuta cuando algun atributo del componente cambia, se agrega, se remueve. Solamente trabaja con las propiedades definidas en el objeto dentro del método de *properties*.
+
+# Estilos
+
+Para agregar reglas css en el componente se usa el selector **:host** (LocalDOM)
+
+Para agregar reglas css en el contenido del componente se usa el selector **:host ::slotted()** (LightDOM)
+
+## CSS Custom properties
+
+componente.html (Dentro del componente)
+```` css
+:host {
+  background-color: var(--my-bg-color, #f00);
+}
+````
+
+app.html (Fuera del componente)
+```` css
+:host {
+  --my-bg-color: #f0f;
+}
+````
+
+Permite exponer la parte personalizable del componente.
+
+Permite personalizar componentes creados por otros.
+  
+Son aplicadas una sola vez en tiempo de creación
+
+## Custom mixins
+
+````
+@apply(<nombre-del-mixin>)
+````
+
+componente.html (Dentro del componente)
+```` css
+#misReglas {
+  @apply --mis-reglas;
+}
+````
+
+app.html (Fuera del componente)
+```` css
+--mis-reglas {
+  background-color: #f0f;
+  color: #000;
+  font-size: 16px;
+}
+````
+
+Personaliza al 100% partes de nuestro componente.
+
+## Actualizar estilos
+
+```` javascript
+this.customStyle['<custom-css-property>'] = '<valor>';
+this.updateStyles();
+````
+
+Ya sea mediante una función o método mediante un evento.
