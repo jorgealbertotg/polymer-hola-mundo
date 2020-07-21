@@ -1,25 +1,53 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="../bower_components/polymer/lib/elements/dom-if.html">
+<link rel="import" href="../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
 
 <dom-module id="mi-componente">
   <template>
     <style>
       :host {
       }
+      span.me {
+        display: inline-block;
+        border: 1px solid red;
+        background-color: tomato;
+        color: #fff;
+        padding: 5px;
+        border-radius: 5px;
+      }
+      span:not(.me) {
+        display: inline-block;
+        border: 1px solid blue;
+        background-color: skyblue;
+        color: blue;
+        padding: 5px;
+        border-radius: 5px;
+      }
     </style>
     <h2>Hola, Soy [[name]]</h2>
-    <dom-repeat items="{{family}}" as="familyMember" index-as="count">
+    <dom-repeat items="{{family}}" as="familyMember" index-as="count" filter="_isSomeone">
       <template>
         <p>
           <button on-tap="_print">Select</button>
           #{{count}} - {{familyMember.name}} {{familyMember.lastName}}
+          <dom-if if="{{familyMember.me}}">
+            <template>
+              <span class="me">Soy yo</span>
+            </template>
+          </dom-if>
+          <dom-if if="{{!familyMember.me}}">
+            <template>
+              <span>Alguien más</span>
+            </template>
+          </dom-if>
         </p>
       </template>
     </dom-repeat>
   </template>
 
   <script>
-    class MiComponente extends Polymer.Element {
+    class MiComponente extends Polymer.GestureEventListeners(Polymer.Element) {
       
       static get is() { return 'mi-componente'; }
 
@@ -32,21 +60,26 @@
           family: {
             type: Array,
             value: [
-              {name: 'Jusdawn2', lastName: 'Garcia'},
-              {name: 'sJugan', lastName: 'qGarcia'},
-              {name: 'rJ4uan', lastName: 'Gwarcia'},
-              {name: 'J11uan', lastName: 'Gaercia'},
-              {name: 'gtJutan', lastName: 'Gawrrcia'},
-              {name: '0rJuasn', lastName: 'wGearrcia'},
-              {name: '3fJwuaern', lastName: 'Gsardciaf'}
+              {name: 'Jusdawn2', lastName: 'Garcia', me: false},
+              {name: 'sJugan', lastName: 'qGarcia', me: false},
+              {name: 'rJ4uan', lastName: 'Gwarcia', me: true},
+              {name: 'J11uan', lastName: 'Gaercia', me: false},
+              {name: 'gtJutan', lastName: 'Gawrrcia', me: false},
+              {name: '0rJuasn', lastName: 'wGearrcia', me: false},
+              {name: '3fJwuaern', lastName: 'Gsardciaf', me: false}
             ]
           }
         };
       }
 
       _print(e) {
-        var model = e.model;
-        console.log(model.item.name + " " + model.item.lastName);
+        var model = this.shadowRoot.querySelector('dom-repeat').modelForElement(e.target).__data.familyMember;
+        
+        console.log(model.name + " " + model.lastName);
+      }
+
+      _isSomeone(item) {
+        return item.lastName !== 'qGarcia';
       }
     }
     window.customElements.define(MiComponente.is, MiComponente);
