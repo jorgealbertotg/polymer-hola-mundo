@@ -59,4 +59,18 @@ La etiqueta **template** no *'aparece'*. Para usarlo dentro de un *custom elemen
 
 # Componentes Polymer
 
-Las clases extienden de **Polymer.Element**
+- Las clases extienden de **Polymer.Element**
+- Cada componente en un archivo **HTML**
+- Nombre del componente debe tener un guión
+- Para usar ese componente se debe de importar con HTML import
+
+```` html
+<link rel="import" href="ruta/al/componente.html">
+````
+
+## Estructura del componente Polymer
+
+1. Dependencias (polymer-element.html)
+2. Etiqueta <dom-module id="nombre-del-componente"> Engloba todo el componente.
+3. Etiqueta <template> Define la visualización del componente. HTML y CSS.
+4. Etiqueta <script> Registra el componente y su funcionalidad.
