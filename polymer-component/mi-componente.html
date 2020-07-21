@@ -1,0 +1,20 @@
+<link rel="import" href="https://polygit.org/polymer+^v2.6.0/webcomponentsjs+^v1.3.0/components/polymer/polymer-element.html">
+
+<template id="contenido">
+  <style>
+    h1 {
+      color: tomato;
+    }
+  </style>
+  <h1>Componente</h1>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, nulla soluta. Quos, mollitia unde. Itaque excepturi deserunt repellendus voluptates quas vel natus provident, est quo voluptate, odit velit, nihil nulla.</p>
+</template>
+
+<script>
+  class MiComponente extends Polymer.Element {
+    static get template() {
+      return document.getElementById('contenido');
+    }
+  }
+  customElements.define('mi-componente', MiComponente);
+</script>

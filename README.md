@@ -9,6 +9,19 @@ Filosofía: Utilizar la plataforma, aprovechar las API's que ya ofrecen los nave
 
 Simplifica la sintaxis para crear **Web Components**.
 
+## Polymer 2
+Es una libreria de **Google** basada en web componentes para poder crear componentes personalizados para que tengan una serie de funcionalidades adicionales a lo que el propio JS nativo nos ofrece.
+
+Con Polymer encima de web components podemos facilitar el desarrollo de eb components, facilitar la interoperabilidad, binding de datos, facilita el desarrollo de aplicaciones complejas, etc.
+
+Polymer 1 usaba Web Components V0. Polymer 2 usa Web Components V1.
+
+- Polymer 2 pesa 12KB.
+- Los componentes se integran más facilmente con otros frameworks.
+- Se usan clases ES6
+- Migraciones Polymer 1 y Polymer 2 de forma progresiva.
+- Más de 700 proyectos desarrollados en Polymer como YouTube.
+
 # Web Components
 Especificaciones, estándares abiertos que los navegadores implementan para facilitar el desarrollo de nuevos elementos que extienden la web.
 
@@ -43,3 +56,7 @@ Componentes encapsulados desde el **shadow root**
 ### TEMPLATE
 
 La etiqueta **template** no *'aparece'*. Para usarlo dentro de un *custom element*, le asignamos un *id* y accedemos a su contenido y lo volcamos dentro del *custom element* mediante la propiedad **innerHTML** de los elementos.
+
+# Componentes Polymer
+
+Las clases extienden de **Polymer.Element**
