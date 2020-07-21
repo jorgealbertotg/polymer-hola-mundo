@@ -156,3 +156,15 @@ this.updateStyles();
 ````
 
 Ya sea mediante una función o método mediante un evento.
+
+# Eventos
+
+Para manejar eventos desde los elementos del DOM se utiliza la sintaxis **on-<nombre-del-evento>** como atributo del elemento y cuyo valor será el método que se ejecutara para manejar el evento.
+
+```` html
+<button on-click="handleClick">click</button>
+````
+
+Todos los eventos son en *lowercase*.
+
+El evento **on-tap** es mejor que **on-click**.

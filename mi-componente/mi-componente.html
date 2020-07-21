@@ -1,0 +1,90 @@
+<!-- Importamos el Polymer.Element del archivo "polymer-element.html" -->
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<!-- Toda la implementación del componente se hace dentro de la
+  etiqueta "dom-module" donde el atributo id sera el nombre de la
+  etiqueta asociada a este componente -->
+<dom-module id="mi-componente">
+  <!-- El HTML y el CSS se indican dentro de la etiqueta "template" -->
+  <template>
+    <style>
+      :host, button {
+        display: block;
+      }
+      div {
+        border: 1px solid tomato;
+      }
+    </style>
+    <!-- Las propiedades del elemento se asocian mediante [[]] ó {{}} -->
+    <h2>Eventos</h2>
+    <!-- El contenido del componente se recupera con la etiqueta "slot" -->
+    <div>
+      <slot></slot>
+    </div>
+    <button on-click="handleClick">Hacer click</button>
+    <button on-click="handleClick2">Hacer kick</button>
+  </template>
+
+  <script>
+
+    /* Cada componente esta asociado a una clase JS y extiende a la clase
+      Polymer.Element del archivo polymer-element.html */
+    class MiComponente extends Polymer.Element {
+      
+      /* El método estatico "is" devuelve la etiqueta del componente */
+      static get is() { return 'mi-componente'; }
+
+      /* El método estatico "properties" regresa las propiedades del 
+        componente. Los elementos básicos de las propiedades del componente
+        son el "type" y el "value" */
+      static get properties() {
+        return {
+          
+        };
+      }
+
+      handleClick() {
+        console.log('Click en el boton');
+      }
+
+      handleClick2() {
+        console.log('Click en el boton 2');
+        this.dispatchEvent(new CustomEvent('kick', {detail: {kicked: true}}));
+      }
+
+      ready() {
+        super.ready();
+        const h2 = this.shadowRoot.querySelector('h2');
+        const div = this.shadowRoot.querySelector('div');
+        h2.addEventListener('mouseenter', this.handleMouseEnter.bind(this));
+        div.addEventListener('mouseout', event => this.handleMouseOut(event) );
+        this.addEventListener('click', this._onClick);
+      }
+
+      _onClick(event) {
+        console.log('Click sobre el componente', event);
+      }
+
+      handleMouseEnter(event) {
+        this._onMouseEnter();
+      }
+
+      handleMouseOut(event) {
+        this._onMouseOut();
+      }
+
+      _onMouseEnter() {
+        console.log('mouse enter');
+      }
+
+      _onMouseOut(event) {
+        console.log('mouse out');
+      }
+    }
+
+    /* Se define el componente mediante el método "define" del objeto "customElements"
+      del objeto "window", al cual se le pasan como parámetros la etiqueta del componente 
+      y la clase JS asociada al componente */
+    window.customElements.define(MiComponente.is, MiComponente);
+  </script>
+</dom-module>
