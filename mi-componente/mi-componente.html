@@ -1,0 +1,82 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="mi-componente">
+  <template>
+    <style>
+      :host {
+      }
+    </style>
+    <h2>Hola, Soy {{name}} {{lastName}}</h2>
+    <p>Telefóno: {{phone.mobile}}</p>
+    <p>Trabajo: {{phone.work}}</p>
+    <p>
+      <input value="{{name::input}}">
+      <input value="{{lastName::input}}">
+    </p>
+    <p>
+      <input value="{{nA::input}}">
+      <input value="{{nB::input}}">
+    </p>
+    <p>Multiplición: {{nA}}x{{nB}}={{multiply(nA, nB)}}</p>
+    <div>
+      <p>Friends</p>
+      <p>{{arrayItem(friends.*, 0, 'name')}}</p>
+      <p>{{arrayItem(friends.*, 1, 'name')}}</p>
+      <p>{{arrayItem(friends.*, 2, 'name')}}</p>
+    </div>
+  </template>
+
+  <script>
+    class MiComponente extends Polymer.Element {
+      
+      static get is() { return 'mi-componente'; }
+
+      static get properties() {
+        return {
+          name: {
+            type: String,
+            value: 'Jorge',
+            reflectToAttribute: true
+          },
+          lastName: {
+            type: String,
+            value: 'Tolentino',
+            reflectToAttribute: true
+          },
+          nA: {
+            type: Number,
+            value: 2
+          },
+          nB: {
+            type: Number,
+            value: 2
+          },
+          phone: {
+            type: Object,
+            value: {
+              mobile: '111-111-111',
+              work: '222-222-222'
+            }
+          },
+          friends: {
+            type: Array,
+            value: [
+              {name: 'Hugo'},
+              {name: 'Paco'},
+              {name: 'Luis'}
+            ]
+          }
+        };
+      }
+
+      multiply(a, b) {
+        return a * b;
+      }
+
+      arrayItem(change, index, path) {
+        return this.get(path, change.base[index]);
+      }
+    }
+    window.customElements.define(MiComponente.is, MiComponente);
+  </script>
+</dom-module>

@@ -156,3 +156,36 @@ this.updateStyles();
 ````
 
 Ya sea mediante una función o método mediante un evento.
+
+# Data Binding
+
+Hace posible que los componentes se comuniquen entre ellos.
+
+Existen 2 tipos de binding
+
+## 1 way binding
+
+[[propiedad o subpropiedad]] hacia abajo, de la propiedad al local DOM
+
+## 2 way binding
+
+La propiedad debe estar preparada para ser usada en *2 way binding* (notify: true)
+
+{{propiedad o subpropiedad}}
+
+### Convención de nombres
+
+first-name="{{managerName}}"
+firstName = this.managerName
+
+## Binding de atributos
+
+```` javascript
+attribute$="{{value}}"
+````
+Equivalente a elemento.setAttribute('attribute', this.value)
+
+```` javascript
+property={{value}}
+````
+Equivalente a elemento.property = this.value;
