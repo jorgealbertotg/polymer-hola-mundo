@@ -1,0 +1,74 @@
+<!-- Importamos el Polymer.Element del archivo "polymer-element.html" -->
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<!-- Toda la implementación del componente se hace dentro de la
+  etiqueta "dom-module" donde el atributo id sera el nombre de la
+  etiqueta asociada a este componente -->
+<dom-module id="hello-component">
+  <!-- El HTML y el CSS se indican dentro de la etiqueta "template" -->
+  <template>
+    <style>
+      :host {
+        display: block;
+        border: 1px solid tomato;
+        border-radius: 20px;
+        padding: 20px;
+        @apply --mi-mixin;
+      }
+      div {
+        background-color: #eee;
+        padding: 30px;
+        color: #111;
+      }
+      h2 {
+        color: var(--hello-component-title-color, red);
+      }
+      div ::slotted(p) {
+        color: purple;
+        @apply --content-mixin;
+      }
+    </style>
+    <!-- Las propiedades del elemento se asocian mediante [[]] ó {{}} -->
+    <h2>Hola [[nombre]]!</h2>
+    <!-- El contenido del componente se recupera con la etiqueta "slot" -->
+    <div>
+      <slot name="a"></slot>
+    </div>
+  </template>
+
+  <script>
+    /**
+     * `hello-component`
+     * Test polymer element element
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+
+    /* Cada componente esta asociado a una clase JS y extiende a la clase
+      Polymer.Element del archivo polymer-element.html */
+    class HelloComponent extends Polymer.Element {
+      
+      /* El método estatico "is" devuelve la etiqueta del componente */
+      static get is() { return 'hello-component'; }
+
+      /* El método estatico "properties" regresa las propiedades del 
+        componente. Los elementos básicos de las propiedades del componente
+        son el "type" y el "value" */
+      static get properties() {
+        return {
+          nombre: {
+            type: String,
+            value: 'mundo'
+          }
+        };
+      }
+    }
+
+    /* Se define el componente mediante el método "define" del objeto "customElements"
+      del objeto "window", al cual se le pasan como parámetros la etiqueta del componente 
+      y la clase JS asociada al componente */
+    window.customElements.define(HelloComponent.is, HelloComponent);
+  </script>
+</dom-module>
