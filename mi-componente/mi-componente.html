@@ -1,0 +1,54 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/lib/elements/dom-repeat.html">
+
+<dom-module id="mi-componente">
+  <template>
+    <style>
+      :host {
+      }
+    </style>
+    <h2>Hola, Soy [[name]]</h2>
+    <dom-repeat items="{{family}}" as="familyMember" index-as="count">
+      <template>
+        <p>
+          <button on-tap="_print">Select</button>
+          #{{count}} - {{familyMember.name}} {{familyMember.lastName}}
+        </p>
+      </template>
+    </dom-repeat>
+  </template>
+
+  <script>
+    class MiComponente extends Polymer.Element {
+      
+      static get is() { return 'mi-componente'; }
+
+      static get properties() {
+        return {
+          name: {
+            type: String,
+            value: 'Jorge'
+          },
+          family: {
+            type: Array,
+            value: [
+              {name: 'Jusdawn2', lastName: 'Garcia'},
+              {name: 'sJugan', lastName: 'qGarcia'},
+              {name: 'rJ4uan', lastName: 'Gwarcia'},
+              {name: 'J11uan', lastName: 'Gaercia'},
+              {name: 'gtJutan', lastName: 'Gawrrcia'},
+              {name: '0rJuasn', lastName: 'wGearrcia'},
+              {name: '3fJwuaern', lastName: 'Gsardciaf'}
+            ]
+          }
+        };
+      }
+
+      _print(e) {
+        var model = e.model;
+        console.log(model.item.name + " " + model.item.lastName);
+      }
+    }
+    window.customElements.define(MiComponente.is, MiComponente);
+  </script>
+</dom-module>
