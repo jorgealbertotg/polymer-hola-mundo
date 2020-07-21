@@ -1,0 +1,55 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="mi-componente">
+  <template>
+    <style>
+      h1 {
+        color: tomato;
+      }
+    </style>
+    <h1>Componente</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, nulla soluta. Quos, mollitia unde. Itaque excepturi deserunt repellendus voluptates quas vel natus provident, est quo voluptate, odit velit, nihil nulla.</p>
+  </template>
+
+  <script>
+    class MiComponente extends Polymer.Element {
+
+      static get is() { return 'mi-componente'; }
+
+      static get properties() {
+        return {
+          nombre: {
+            type: String,
+            value: 'Jorge'
+          }
+        }
+      }
+
+      constructor() {
+        super();
+        console.log('Constructor');
+      }
+      
+      connectedCallback() {
+        super.connectedCallback();
+        console.log('Connected callback');
+      }
+
+      disconnectedCallback() {
+        super.disconnectedCallback();
+        console.log('Disconnected callback');
+      }
+
+      ready() {
+        super.ready();
+        console.log('Ready');
+      }
+
+      attributeChangedCallback() {
+        super.attributeChangedCallback();
+        console.log('Attribute callback');
+      }
+    }
+    customElements.define(MiComponente.is, MiComponente);
+  </script>
+</dom-module>
