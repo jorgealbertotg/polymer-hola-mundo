@@ -16,7 +16,7 @@
       }
     </style>
     <!-- Las propiedades del elemento se asocian mediante [[]] ó {{}} -->
-    <h2>Eventos</h2>
+    <h2 on-mouseenter="handleMouseEnter">Eventos</h2>
     <!-- El contenido del componente se recupera con la etiqueta "slot" -->
     <div>
       <slot></slot>
@@ -49,14 +49,24 @@
 
       handleClick2() {
         console.log('Click en el boton 2');
-        this.dispatchEvent(new CustomEvent('kick', {detail: {kicked: true}}));
+        this.dispatchEvent(new CustomEvent('kick', {bubbles: true, composed: true, detail: {kicked: true}}));
+        this.firedEvent('kick', {kicked: true});
+      }
+
+      firedEvent(name, detail) {
+        this.dispatchEvent(new CustomEvent(name, {
+          bubbles: true,
+          composed: true,
+          detail
+        }))
       }
 
       ready() {
         super.ready();
+        
         const h2 = this.shadowRoot.querySelector('h2');
         const div = this.shadowRoot.querySelector('div');
-        h2.addEventListener('mouseenter', this.handleMouseEnter.bind(this));
+        //h2.addEventListener('mouseenter', this.handleMouseEnter.bind(this));
         div.addEventListener('mouseout', event => this.handleMouseOut(event) );
         this.addEventListener('click', this._onClick);
       }
