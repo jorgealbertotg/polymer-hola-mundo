@@ -1,0 +1,40 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="child-component">
+  <template>
+    <style>
+      :host {
+        display: block;
+        border: 5px solid purple;
+        padding: 10px;
+      }
+    </style>
+    <h2>Hola [[nombre]] desde child component!</h2>
+    <slot></slot>
+  </template>
+
+  <script>
+    class ChildComponent extends Polymer.Element {
+      
+      static get is() { return 'child-component'; }
+
+      static get properties() {
+        return {
+          nombre: {
+            type: String,
+            value: 'world',
+            notify: true
+          }
+        };
+      }
+      
+      ready() {
+        super.ready();
+        setTimeout(() => {
+          this.nombre = 'Alberto';
+        }, 5000);
+      }
+    }
+    window.customElements.define(ChildComponent.is, ChildComponent);
+  </script>
+</dom-module>

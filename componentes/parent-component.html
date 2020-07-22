@@ -1,0 +1,41 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="./child-component.html">
+
+<dom-module id="parent-component">
+  <template>
+    <style>
+      :host {
+        display: block;
+        border: 5px solid tomato;
+        padding: 10px;
+      }
+    </style>
+    <h2>Hola [[nombre]] desde parent component!</h2>
+    <child-component nombre="{{nombre}}"></child-component>
+    <slot></slot>
+  </template>
+
+  <script>
+    class ParentComponent extends Polymer.Element {
+      
+      static get is() { return 'parent-component'; }
+
+      static get properties() {
+        return {
+          nombre: {
+            type: String,
+            value: 'mundo'
+          }
+        };
+      }
+
+      ready() {
+        super.ready();
+        setTimeout(() => {
+          this.nombre = 'Jorge';
+        }, 3000);
+      }
+    }
+    window.customElements.define(ParentComponent.is, ParentComponent);
+  </script>
+</dom-module>
