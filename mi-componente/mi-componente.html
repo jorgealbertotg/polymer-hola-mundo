@@ -1,0 +1,112 @@
+<!-- Importamos el Polymer.Element del archivo "polymer-element.html" -->
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="mi-componente">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2 id="header">Hello [[nombre]]!</h2>
+    <div>
+      <p>Primer hobbie: [[hobbies.first]]</p>
+      <p>Segundo hobbie: [[hobbies.second]]</p>
+      <p><slot name="title"></slot></p>
+      <p><slot name="subtitle"></slot></p>
+    </div>
+  </template>
+
+  <script>
+    class MiComponente extends Polymer.Element {
+      
+      static get is() { return 'mi-componente'; }
+
+      static get properties() {
+        return {
+          nombre: {
+            type: String,
+            value: 'world'
+          },
+          hobbies: {
+            type: Object,
+            value: {
+              first: '',
+              second: ''
+            }
+          },
+          preload: Boolean,
+          src: String,
+          size: String,
+          fruits: {
+            type: Array,
+            value: [
+            'apple',
+            'banana',
+            'coco'
+          ]}
+        };
+      }
+
+      static get observers() {
+        return [
+          //'_firstHobbieChanged(hobbies.first)',
+          //'_hobbiesChanged(hobbies.first, hobbies.second)'
+          //'_updateImage(preload, src, size)'
+          //'_fruitsChange(fruits.splices)'
+          '_hobbiesChanged1(hobbies.*)',
+        ];
+      }
+
+      _firstHobbieChanged(hobbie) {
+        console.log('First hobbie change');
+        console.log(hobbie);
+      }
+
+      _hobbiesChanged(hobbie1, hobbie2) {
+        console.log('Hobbies change');
+        console.log(hobbie1);
+        console.log(hobbie2);
+      }
+
+      _updateImage(preload, src, size) {
+        console.log(`${preload} ${src} ${size}`);
+      }
+
+      _hobbiesChanged1(changeRecord) {
+        console.log('Hobbies change');
+        console.log(changeRecord);
+      }
+
+      ready() {
+        super.ready();
+        // setInterval(() => {
+        //   console.log('=============== Change... ==============');
+        //   this.set('hobbies.first', 'f5'+ Math.random().toString());
+        //   this.set('hobbies.second', '5r'+ Math.random().toString());
+        // }, 3000);
+
+        // setInterval(() => {
+        //   console.log('=============== Change... ==============');
+        //   this.set('src', 'f5'+ Math.random().toString());
+        // }, 3000);
+
+        // setInterval(() => {
+        //   console.log('=============== Change... ==============');
+        //   this.push('fruits', 'f'+ Math.random().toString());
+        // }, 3000);
+
+        
+        // setInterval(() => {
+        //   console.log('=============== Change... ==============');
+        //   this.set('hobbies.first', 'f5'+ Math.random().toString());
+        // }, 3000);
+      }
+
+      _fruitsChange(splices) {
+        console.log(splices);
+      }
+    }
+    window.customElements.define(MiComponente.is, MiComponente);
+  </script>
+</dom-module>
