@@ -1,0 +1,47 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="componente-simple">
+  <template>
+    <style>
+      :host {
+        display: block;
+        border: 1px solid tomato;
+      }
+    </style>
+    <h2 id="header">Hello [[completo]]!</h2>
+  </template>
+
+  <script>
+    const MyMixin = (superClass) => class extends superClass {
+      constructor() {
+        super();
+      }
+
+      static get properties() {
+        return {
+          nombre: {
+            type: String,
+            value: 'Jorge'
+          },
+          apellido: {
+            type: String,
+            value: 'Tolentino'
+          },
+          completo: {
+            type: String,
+            computed: '_computedFullName(nombre, apellido)'
+          }
+        }
+      }
+
+      _computedFullName(nombre, apellido) {
+        return `${nombre} ${apellido}`;
+      }
+    }
+
+    class ComponenteSimple extends MyMixin(Polymer.Element) {
+      static get is() { return 'componente-simple'; }
+    }
+    window.customElements.define(ComponenteSimple.is, ComponenteSimple);
+  </script>
+</dom-module>
