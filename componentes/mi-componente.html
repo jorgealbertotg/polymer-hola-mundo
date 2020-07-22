@@ -10,6 +10,8 @@
       }
     </style>
     <h2 id="header">Hello [[nombre]]!</h2>
+    <h3>Tu nombre completo es: [[nom]]</h3>
+    <button on-click="cambia">Cambia</button>
   </template>
 
   <script>
@@ -21,9 +23,26 @@
         return {
           nombre: {
             type: String,
-            value: 'world'
+            value: 'world',
+            //readOnly: true,
+            reflectToAttribute: true
+          },
+          last: String,
+          nom: {
+            type: String,
+            computed: '_computeFullName(nombre, last)'
           }
         };
+      }
+
+      _computeFullName(nombre, last) {
+        if (!nombre || !last) return 'Nombre incompleto';
+        return `${nombre} ${last}`
+      }
+
+      cambia() {
+        this.last = 'Tolentino';
+        this.nombre = new Date().toLocaleString();
       }
     }
     window.customElements.define(MiComponente.is, MiComponente);
