@@ -25,11 +25,26 @@
         var c = document.getElementById('contenido');
         this.attachShadow({mode: 'open'}).innerHTML = c.innerHTML;
       }
+
+      connectedCallback() {
+        console.log('connected callback');
+      }
+
+      disconnectedCallback() {
+        console.log('disconnected callback');
+      }
+
+      attributeChangedCallback(attr, oldValue, currentValue) {
+        console.log('attribute changed callback', attr, oldValue, currentValue);
+      }
+
+      static get observedAttributes() {
+        return ['hola'];
+      }
     }
     customElements.define('mi-componente', MiComponente);
   </script>
 
   <mi-componente></mi-componente>
-  
 </body>
 </html>
