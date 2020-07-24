@@ -64,6 +64,13 @@
           }
         };
       }
+
+      ready() {
+        super.ready();
+        setTimeout(() => {
+          this.updateStyles({'--hello-component-title-color': 'yellow'});
+        }, 5000);
+      }
     }
 
     /* Se define el componente mediante el método "define" del objeto "customElements"
