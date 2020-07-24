@@ -42,9 +42,22 @@
         return {
           prop1: {
             type: String,
-            value: 'world'
+            value: 'world',
+            observer: '_miObserver'
           }
         };
+      }
+
+      _miObserver(current, last) {
+        console.log('Cambio', current, last);
+      }
+
+      ready() {
+        super.ready();
+        setTimeout(() => {
+          console.log('cambio');
+          this.prop1= 'cambio';
+        },1000);
       }
     }
 
