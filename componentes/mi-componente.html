@@ -1,6 +1,8 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../bower_components/polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="../bower_components/polymer/lib/elements/dom-if.html">
+<link rel="import" href="../bower_components/paper-spinner/paper-spinner.html">
 
 <dom-module id="mi-componente">
   <template>
@@ -12,25 +14,37 @@
     </style>
     <iron-ajax 
       auto 
-       url="https://picsum.photos/v2/list?page=1&limit=10"
+       url="https://picsum.photos/v2/list?page={{page}}&limit=10"
        handle-as="json"
        last-response="{{items}}"
+       loading="{{loading}}"
+       debounceDuration="{{time}}"
        on-response="handleResponse"></iron-ajax>
 
     <h2 id="header">Hello [[nombre]] from <strong>mi-componente</strong>!</h2>
     <slot></slot>
-    <section>
-      <dom-repeat items="{{items}}">
-        <template>
+    <dom-if if="{{!loading}}">
+      <template>
+        <section>
+          <dom-repeat items="{{items}}">
+            <template>
+              <p>
+                <strong>{{item.id}}</strong> 
+                {{item.author}} 
+                <em>{{item.width}}x{{item.height}}</em>
+                <a href="{{item.url}}">{{item.url}}</a>
+              </p>
+            </template>
+          </dom-repeat>
           <p>
-            <strong>{{item.id}}</strong> 
-            {{item.author}} 
-            <em>{{item.width}}x{{item.height}}</em>
-            <a href="{{item.url}}">{{item.url}}</a>
+            <button on-click="_backClick" disabled="{{back}}"><<</button>
+            [[page]]
+            <button on-click="_nextClick">>></button>
           </p>
-        </template>
-      </dom-repeat>
-    </section>
+        </section>
+      </template>
+    </dom-if>
+    <paper-spinner alt="Cargando..." active="{{loading}}"></paper-spinner>
   </template>
 
   <script>
@@ -47,6 +61,22 @@
           items: {
             type: Array,
             value: []
+          },
+          page: {
+            type: Number,
+            value: 1
+          },
+          back: {
+            type: Boolean,
+            value: true
+          },
+          loading: {
+            type: Boolean,
+            value: false
+          },
+          time: {
+            type: Number,
+            value: 5
           }
         };
       }
@@ -57,6 +87,20 @@
 
       constructor() {
         super();
+      }
+
+      _nextClick() {
+        ++this.page
+        this._disableClick();
+      }
+
+      _disableClick() {
+        this.back = this.page <= 1 ? true : false;
+      }
+
+      _backClick() {
+        this.page = this.page < 1 ? 1 : --this.page;
+        this._disableClick();
       }
     }
     window.customElements.define(MiComponente.is, MiComponente);
