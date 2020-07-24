@@ -1,0 +1,64 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/polymer/lib/elements/dom-repeat.html">
+
+<dom-module id="mi-componente">
+  <template>
+    <style>
+      :host {
+        display: block;
+        border: 5px solid skyblue;
+      }
+    </style>
+    <iron-ajax 
+      auto 
+       url="https://picsum.photos/v2/list?page=1&limit=10"
+       handle-as="json"
+       last-response="{{items}}"
+       on-response="handleResponse"></iron-ajax>
+
+    <h2 id="header">Hello [[nombre]] from <strong>mi-componente</strong>!</h2>
+    <slot></slot>
+    <section>
+      <dom-repeat items="{{items}}">
+        <template>
+          <p>
+            <strong>{{item.id}}</strong> 
+            {{item.author}} 
+            <em>{{item.width}}x{{item.height}}</em>
+            <a href="{{item.url}}">{{item.url}}</a>
+          </p>
+        </template>
+      </dom-repeat>
+    </section>
+  </template>
+
+  <script>
+    class MiComponente extends Polymer.Element {
+      
+      static get is() { return 'mi-componente'; }
+
+      static get properties() {
+        return {
+          nombre: {
+            type: String,
+            value: 'world'
+          },
+          items: {
+            type: Array,
+            value: []
+          }
+        };
+      }
+
+      handleResponse(e) {
+        console.log(e);
+      }
+
+      constructor() {
+        super();
+      }
+    }
+    window.customElements.define(MiComponente.is, MiComponente);
+  </script>
+</dom-module>
