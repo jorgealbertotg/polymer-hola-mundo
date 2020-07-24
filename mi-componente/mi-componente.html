@@ -6,9 +6,9 @@
       :host {
       }
     </style>
-    <h2>Hola, Soy {{name}} {{lastName}}</h2>
-    <p>Telefóno: {{phone.mobile}}</p>
-    <p>Trabajo: {{phone.work}}</p>
+    <h2>Hola, Soy [[name]] [[lastName]]</h2>
+    <p>Telefóno: [[phone.mobile]]</p>
+    <p>Trabajo: [[phone.work]]</p>
     <p>
       <input value="{{name::input}}">
       <input value="{{lastName::input}}">
@@ -17,12 +17,12 @@
       <input value="{{nA::input}}">
       <input value="{{nB::input}}">
     </p>
-    <p>Multiplición: {{nA}}x{{nB}}={{multiply(nA, nB)}}</p>
+    <p>Multiplición: [[nA]]x[[nB]]=[[multiply(nA, nB)]]</p>
     <div>
       <p>Friends</p>
-      <p>{{arrayItem(friends.*, 0, 'name')}}</p>
-      <p>{{arrayItem(friends.*, 1, 'name')}}</p>
-      <p>{{arrayItem(friends.*, 2, 'name')}}</p>
+      <p>[[arrayItem(friends.*, 0, 'name')]]</p>
+      <p>[[arrayItem(friends.*, 1, 'name')]]</p>
+      <p>[[arrayItem(friends.*, 2, 'name')]]</p>
     </div>
   </template>
 
@@ -75,6 +75,13 @@
 
       arrayItem(change, index, path) {
         return this.get(path, change.base[index]);
+      }
+
+      ready() {
+        super.ready();
+        setInterval(() => {
+          this.name = new Date().toLocaleString();
+        }, 5000);
       }
     }
     window.customElements.define(MiComponente.is, MiComponente);
