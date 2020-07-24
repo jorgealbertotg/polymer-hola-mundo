@@ -1,0 +1,160 @@
+{
+  "schema_version": "1.0.0",
+  "elements": [
+    {
+      "description": "",
+      "summary": "",
+      "path": "mi-componente.html",
+      "properties": [
+        {
+          "name": "name",
+          "type": "string | null | undefined",
+          "description": "",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 55,
+              "column": 10
+            },
+            "end": {
+              "line": 58,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "String"
+            }
+          },
+          "defaultValue": "\"Jorge\""
+        },
+        {
+          "name": "family",
+          "type": "Array | null | undefined",
+          "description": "",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 59,
+              "column": 10
+            },
+            "end": {
+              "line": 70,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Array"
+            }
+          },
+          "defaultValue": "[{\"name\":\"Jusdawn2\",\"lastName\":\"Garcia\",\"me\":false},{\"name\":\"sJugan\",\"lastName\":\"qGarcia\",\"me\":false},{\"name\":\"rJ4uan\",\"lastName\":\"Gwarcia\",\"me\":true},{\"name\":\"J11uan\",\"lastName\":\"Gaercia\",\"me\":false},{\"name\":\"gtJutan\",\"lastName\":\"Gawrrcia\",\"me\":false},{\"name\":\"0rJuasn\",\"lastName\":\"wGearrcia\",\"me\":false},{\"name\":\"3fJwuaern\",\"lastName\":\"Gsardciaf\",\"me\":false}]"
+        }
+      ],
+      "methods": [
+        {
+          "name": "_print",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 74,
+              "column": 6
+            },
+            "end": {
+              "line": 78,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "e"
+            }
+          ],
+          "return": {
+            "type": "void"
+          }
+        },
+        {
+          "name": "_isSomeone",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 80,
+              "column": 6
+            },
+            "end": {
+              "line": 82,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "item"
+            }
+          ]
+        }
+      ],
+      "staticMethods": [],
+      "demos": [],
+      "metadata": {},
+      "sourceRange": {
+        "start": {
+          "line": 49,
+          "column": 4
+        },
+        "end": {
+          "line": 83,
+          "column": 5
+        }
+      },
+      "privacy": "public",
+      "superclass": "HTMLElement",
+      "name": "MiComponente",
+      "attributes": [
+        {
+          "name": "name",
+          "description": "",
+          "sourceRange": {
+            "start": {
+              "line": 55,
+              "column": 10
+            },
+            "end": {
+              "line": 58,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "string | null | undefined"
+        },
+        {
+          "name": "family",
+          "description": "",
+          "sourceRange": {
+            "start": {
+              "line": 59,
+              "column": 10
+            },
+            "end": {
+              "line": 70,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "Array | null | undefined"
+        }
+      ],
+      "events": [],
+      "styling": {
+        "cssVariables": [],
+        "selectors": []
+      },
+      "slots": [],
+      "tagname": "mi-componente"
+    }
+  ]
+}
