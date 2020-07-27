@@ -26,17 +26,17 @@
       }
     </style>
     <h2>Hola, Soy [[name]]</h2>
-    <dom-repeat items="{{family}}" as="familyMember" index-as="count" filter="_isSomeone">
+    <dom-repeat id="familyTree" items="{{family}}" as="otro" index-as="count" filter="_isSomeone">
       <template>
         <p>
-          <button on-tap="_print">Select</button>
-          #{{count}} - {{familyMember.name}} {{familyMember.lastName}}
-          <dom-if if="{{familyMember.me}}">
+          <button on-tap="_print" data-index="[[count]]">Select</button>
+          #{{count}} - {{otro.name}} {{otro.lastName}} {{otro.me}}
+          <dom-if if="{{otro.me}}">
             <template>
               <span class="me">Soy yo</span>
             </template>
           </dom-if>
-          <dom-if if="{{!familyMember.me}}">
+          <dom-if if="{{!otro.me}}">
             <template>
               <span>Alguien más</span>
             </template>
@@ -73,9 +73,20 @@
       }
 
       _print(e) {
-        var model = this.shadowRoot.querySelector('dom-repeat').modelForElement(e.target).__data.familyMember;
+        // console.log(e.model.otro);
+        // console.log(e.model.count);
+        this.family.forEach((element, index) => {
+          if (element.me) {
+            console.log(this.family[index].me);
+            const me = { ...this.family[index], me: false};
+            this.splice(`family`, index, 1, me);
+          }
+        });
+        e.model.set(`otro.me`, !e.model.otro.me);
+        console.log(this.family);
+        // var model = this.shadowRoot.querySelector('dom-repeat').modelForElement(e.target).__data.familyMember;
         
-        console.log(model.name + " " + model.lastName);
+        // console.log(model.name + " " + model.lastName);
       }
 
       _isSomeone(item) {
